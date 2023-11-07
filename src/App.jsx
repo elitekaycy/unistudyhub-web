@@ -11,11 +11,11 @@ const AppRouter = createBrowserRouter([
     path: "/feed",
     element: <Feed />
   },
-  {
-  path: "/login",
-  element: <Login />,
+   {
+    path: "/login",
+    element: <Login />,
   },
 ])
-
+ 
 
 export default AppRouter;
