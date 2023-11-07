@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Feed, Home } from "./Pages";
+import Login from "./Pages/Login";
 
 const AppRouter = createBrowserRouter([
   {
@@ -9,8 +10,12 @@ const AppRouter = createBrowserRouter([
   {
     path: "/feed",
     element: <Feed />
-  }
+  },
+   {
+    path: "/login",
+    element: <Login />,
+  },
 ])
+ 
 
-
-export default AppRouter
+export default AppRouter;
