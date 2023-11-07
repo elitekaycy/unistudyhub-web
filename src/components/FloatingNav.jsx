@@ -31,7 +31,7 @@ function FloatingNav() {
   }, [location]);
 
   return (
-    <nav className="fixed scale-90 xs:scale-75 shadow-lg w-full sm:max-w-md p-4 bottom-16 flex flex-row items-center justify-evenly gap-3 left-1/2 transform -translate-x-1/2 rounded-full bg-purple-700 ">
+    <nav className="fixed scale-[0.8] xxl:scale-50 shadow-lg w-full sm:max-w-md p-4 bottom-16 flex flex-row items-center justify-evenly gap-3 left-1/2 transform -translate-x-1/2 rounded-full bg-purple-700 ">
       {navTabs &&
         navTabs.map((navItem) => (
           <div

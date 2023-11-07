@@ -13,7 +13,7 @@ function NavigationBar() {
 
   return (
     <>
-      <div className="sticky w-full flex flex-row items-center justify-between p-2 sm:p-6 sm:px-56 px-4 bg-white shadow-sm">
+      <div className="sticky w-full flex flex-row items-center justify-between p-2 sm:p-4 lg:px-52 px-4 bg-white shadow-sm">
         <div className="tracking-tighter text-2xl sm:text-3xl font-bold">UniStudy</div>
         <div className="flex flex-row items-center justify-evenly space-x-6">
           <div className="w-12 p-3 sm:flex hidden flex-row items-center justify-center hover:border-purple-600 hover:text-purple-600 h-12 rounded-full border border-gray-200">
