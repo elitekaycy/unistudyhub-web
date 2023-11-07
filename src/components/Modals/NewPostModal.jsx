@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import toast from "react-hot-toast";
 
 function NewPostModal({ open, close }) {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -16,36 +17,55 @@ function NewPostModal({ open, close }) {
       id: "computer_engineer",
     },
   ]);
+
   const modalRef = useRef(null);
 
   const CreateResourceFile = () => {
     const hiddenFileInput = useRef(null);
-
-    const handleClick = (event) => {
-      hiddenFileInput.current.click();
-    };
-
-    const handleChange = (event) => {
-      const fileUploaded = event.target.files[0];
-      setResourceFile(fileUploaded);
-    };
     return (
       <>
         <button
           className="flex self-start bg-purple-600 border-0 hover:bg-purple-500 font-semibold p-2 px-4 rounded-md text-white flex-row space-x-2"
-          onClick={handleClick}
+          onClick={() => hiddenFileInput.current.click()}
         >
           <span className="material-symbols-outlined">cloud_upload</span>
           <span>choose file</span>
         </button>
         <input
           type="file"
-          onChange={handleChange}
+          accept=".pdf"
+          onChange={(e) => setResourceFile(e.target.files[0])}
           ref={hiddenFileInput}
           className="hidden"
         />
       </>
     );
+  };
+
+  const PostShareResource = (e) => {
+    e.preventDefault();
+    if (!resourceFile) return toast.error("no resource file to upload");
+    if (description === "")
+      return toast.error("give a valid description of file");
+    if (categories === "") return toast.error("select a category");
+
+    const resourceInput = {
+      category: selectedCategory,
+      description,
+      resource: resourceFile,
+    };
+
+    console.log("resource input is ", resourceInput);
+  };
+
+  const CancelShareResource = (e) => {
+    e.preventDefault();
+    if (!resourceFile || description === "" || selectedCategory == "") close();
+    else {
+      setResourceFile(null);
+      setDescription("");
+      setSelectedCategory("");
+    }
   };
 
   return (
@@ -60,7 +80,7 @@ function NewPostModal({ open, close }) {
         <div className="flex min-h-full items-center justify-center p-4">
           <Dialog.Panel className="mx-auto max-w-md w-full flex flex-col gap-4 items-center bg-white p-8 rounded-md">
             <Dialog.Title ref={modalRef} className="font-bold text-xl">
-              New Post
+              Share Resource
             </Dialog.Title>
 
             <div className="flex flex-row items-center gap-2 bg-gray-100 w-full px-2 rounded-md">
@@ -92,7 +112,39 @@ function NewPostModal({ open, close }) {
               />
             </div>
 
+            {resourceFile && (
+              <div className="w-full flex flex-row items-center justify-between p-2 rounded-md bg-green-100">
+                <span className="font-semibold text-xs">
+                  {resourceFile?.name}
+                </span>
+                <span
+                  onClick={() => setResourceFile(null)}
+                  className="material-symbols-outlined cursor-pointer hover:text-green-400"
+                >
+                  cancel
+                </span>
+              </div>
+            )}
+
             <CreateResourceFile />
+
+            <div className="w-full mt-10 flex-col items-center space-y-2 justify-center">
+              <button
+                onClick={(e) => PostShareResource(e)}
+                className="w-full p-2 flex flex-row items-center gap-2 justify-center rounded-md text-white bg-purple-700 hover:bg-purple-600"
+              >
+                <span className="material-symbols-outlined">upload</span>
+                <span className="font-semibold">share</span>
+              </button>
+
+              <button
+                onClick={(e) => CancelShareResource(e)}
+                className="w-full p-2 flex flex-row items-center gap-2 text-purple-700 justify-center rounded-md border border-purple-700 hover:border-purple-600"
+              >
+                <span className="material-symbols-outlined">cancel</span>
+                <span className="font-semibold">Cancel</span>
+              </button>
+            </div>
           </Dialog.Panel>
         </div>
       </div>
