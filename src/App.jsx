@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Feed, Home } from "./Pages";
-import Login from "./Pages/Login";
+import { Feed, Home, Login, Account, Report } from "./Pages";
 
 const AppRouter = createBrowserRouter([
   {
@@ -15,6 +14,15 @@ const AppRouter = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/user",
+    element: <Account />
+  },
+  {
+    path: "/report",
+    element: <Report />
+  }
+  
 ])
  
 
