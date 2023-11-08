@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import SearchResourceModal from "./Modals/SearchResourceModal";
 
 function FloatingNav() {
   const [location, setLocation] = useState("");
+  const [openSearchResource, setSearchResource] = useState(false)
   const navigate = useNavigate();
 
   const navTabs = [
@@ -31,6 +33,7 @@ function FloatingNav() {
   }, [location]);
 
   return (
+    <>
     <nav className="fixed scale-[0.8] xxl:scale-50 shadow-lg w-full sm:max-w-md p-4 bottom-16 flex flex-row items-center justify-evenly gap-3 left-1/2 transform -translate-x-1/2 rounded-full bg-purple-700 ">
       {navTabs &&
         navTabs.map((navItem) => (
@@ -49,12 +52,15 @@ function FloatingNav() {
         ))}
 
       <div
+         onClick={() => setSearchResource(true)}
         className={`flex flex-col items-center cursor-pointer hover:text-white text-gray-400 scale-100 hover:scale-105 transition ease-in-out duration-150`}
       >
         <span className="material-symbols-outlined">search</span>
         <span className="hidden sm:flex font-semibold">search</span>
       </div>
     </nav>
+    <SearchResourceModal open={openSearchResource} close={() => setSearchResource(false)} />
+    </>
   );
 }
 
