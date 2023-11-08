@@ -29,7 +29,7 @@ function Resource() {
   ];
 
   return (
-    <div className="w-full sm:px-32 px-10 whitespace-normal mt-4 space-y-3 overflow-y-scroll">
+    <div className="w-full max-w-xxl sm:px-32 px-10 whitespace-normal mt-4 space-y-3 overflow-x-hidden">
       {Feed.map((feed, index) => (
         <div key={index} className="flex-col bg-white p-6 rounded-md">
           <div className="mb-4">
