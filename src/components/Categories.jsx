@@ -23,7 +23,7 @@ function Categories() {
   ];
 
   return (
-    <div className="w-full sm:px-32 px-10 whitespace-normal font-body">
+    <div className="w-full sm:px-32 px-10 whitespace-normal font-body font-semibold">
       <div className="flex items-center justify-start overflow-x-scroll">
         {Catego.map((categories, index) => (
           <div
