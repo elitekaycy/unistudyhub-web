@@ -18,12 +18,6 @@ function NavigationBar() {
 
   return (
     <>
-<<<<<<< Updated upstream
-      <div className="sticky w-full flex flex-row items-center justify-between p-2 sm:p-4 lg:px-52 px-4 bg-white shadow-sm">
-        <div className="tracking-tighter text-2xl sm:text-3xl font-bold">UniStudy</div>
-        <div className="flex flex-row items-center justify-evenly space-x-6">
-          <div className="w-12 p-3 sm:flex hidden flex-row items-center justify-center hover:border-purple-600 hover:text-purple-600 h-12 rounded-full border border-gray-200">
-=======
       <div className="fixed top-0 bg-opacity-70 backdrop-blur-sm w-full flex flex-row items-center justify-between p-4 sm:p-6 sm:px-20 px-10 bg-white shadow-sm">
         <div className="tracking-tighter text-2xl sm:text-3xl font-bold font-header">
           UniStudy
@@ -60,7 +54,6 @@ function NavigationBar() {
             </div>
           )}
           <div className="w-12 p-3 sm:flex hidden flex-row items-center justify-center hover:border-bgsecondary hover:text-bgsecondary h-12 rounded-full border border-gray-200">
->>>>>>> Stashed changes
             <span className="cursor-pointer material-symbols-outlined">
               notifications
             </span>
