@@ -1,78 +1,126 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { BASE_URL, universities } from "../utils/constant";
+import { BaseFetch } from "../utils/helper";
+import { useAuthContext } from "../Context/AuthContext";
+import VerificationModal from "../components/Modals/VerificationModal";
 // import LogoDevOutlinedIcon from "@mui/icons-material/LogoDevOutlined";
 
 function Login() {
+  const { login } = useAuthContext();
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [OpenVerificationModal, setIsVerificationModal] = useState(false)
+  const [verificationToken, setVerificationToken] = useState("")
+  
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    getValues,
   } = useForm();
 
-  const onLoginSubmit = (data) => {
-    const user = {};
-    user["username"] = data["login_username"];
-    user["password"] = data["login_password"];
-    console.log("login deatail data i s ", user);
+  const resetForm = () => {
+    setValue("signup_username", "");
+    setValue("signup_password", "");
+    setValue("signup_email", "");
+    setValue("login_password", "");
+    setValue("login_email", "");
+    setValue("signup_university", "");
   };
 
-  const onSignUpSubmit = (data) => {
-    const user = {};
-    user["username"] = data["signup_username"];
-    user["email"] = data["signup_email"];
-    user["password"] = data["signup_password"];
-    user["university"] = data["signup_university"]
-    console.log("signup data ", user);
+  const onLoginSubmit = async (data) => {
+    setLoading(true)
+    const userFormData = new FormData();
+    userFormData.append("username", data?.login_email);
+    userFormData.append("password", data?.login_password);
+
+    try {
+      const loginUser = await BaseFetch(`${BASE_URL}/login/access-token`, {
+        method: "POST",
+        body: userFormData,
+      });
+
+      if (!loginUser) throw new Error("user does not exist");
+      const getUser = await BaseFetch(`${BASE_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${loginUser.access_token}`,
+        },
+      });
+
+      if (!getUser) throw Error("could not get user");
+      if (!getUser.is_verified) {
+        
+        const sendVerificationEmail = await BaseFetch(
+          `${BASE_URL}/users/send_verification_code`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${loginUser.access_token}`,
+            },
+          }
+          );
+          
+          if (!sendVerificationEmail) throw Error("unable to send verification email");
+          setVerificationToken(loginUser.access_token)
+          setIsVerificationModal(true);
+          
+      } else {
+        login(loginUser.access_token, getUser);
+        toast.success("login succesful");
+        navigate("/feed", { replace: true });
+      }
+    } catch (err) {
+      toast.error(`login err ${err}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const universities = [
-    {
-      value: "knust",
-      label: "Kwame Nkrumah University of Science and Technology (KNUST)",
-    },
-    { value: "ug", label: "University of Ghana (UG)" },
-    { value: "ucc", label: "University of Cape Coast (UCC)" },
-    { value: "uhas", label: "University of Health and Allied Sciences (UHAS)" },
-    {
-      value: "legon",
-      label: "University of Professional Studies, Accra (UPSA)",
-    },
-    {
-      value: "upsa",
-      label: "University of Energy and Natural Resources (UENR)",
-    },
-    { value: "gtuc", label: "Ghana Technology University College (GTUC)" },
-    {
-      value: "gimpa",
-      label: "Ghana Institute of Management and Public Administration (GIMPA)",
-    },
-    {
-      value: "uccs",
-      label: "University of Cape Coast - School of Medical Sciences (UCCSMS)",
-    },
-    { value: "uds", label: "University for Development Studies (UDS)" },
-    { value: "kpoly", label: "Koforidua Technical University (KPoly)" },
-    { value: "takoradi", label: "Takoradi Technical University (TTU)" },
-    { value: "kstu", label: "Kumasi Technical University (KSTU)" },
-    {
-      value: "wiuc",
-      label: "Wisconsin International University College (WIUC)",
-    },
-    { value: "cktu", label: "Cape Coast Technical University (CCTU)" },
-    {
-      value: "wa",
-      label: "University for Development Studies, Wa Campus (UDS-Wa)",
-    },
-  ];
+
+  const onSignUpSubmit = async (data) => {
+    setLoading(true);
+    const user = {
+      username: data?.signup_username,
+      email: data?.signup_email,
+      password: data?.signup_password,
+    };
+
+    // user["university"] = data["signup_university"]
+
+    try {
+      const createUser = await fetch(`${BASE_URL}/users/open`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (!createUser.ok) throw new Error("not created");
+
+      toast.success("created user successfully");
+      setIsLogin(true);
+    } catch (err) {
+      toast.error("unable to login ", String(err));
+    } finally {
+      setLoading(false);
+      resetForm();
+    }
+  };
 
   function setLogin() {
     setIsLogin(!isLogin);
   }
 
   return (
+    <>
     <div className="bg-bgprimary lg:bg-[url('./src/assets/bg2.jpg')] min-h-screen bg-cover flex justify-center items-center">
       <div className="flex w-full mx-auto lg:w-9/12 p-4 bg-bgprimary rounded-md  backdrop-blur">
         <div className="hidden md:flex w-1/2  md:px-4 md:py-10 lg:px-6 lg:py-12 xl:px-8 xl:py-14 text-textsecondary flex-col space-y-6 relative">
@@ -117,15 +165,15 @@ function Login() {
                   <div>
                     <input
                       type="text"
-                      placeholder="Username"
+                      placeholder="email"
                       className="px-4 py-4 w-full rounded-md placeholder-textsecondary"
-                      {...register("login_username", { required: true })}
+                      {...register("login_email", { required: true })}
                       defaultValue={""}
                     />
 
-                    {errors["login_username"] && (
+                    {errors["login_email"] && (
                       <p className="text-red-600">
-                        {errors["login_username"].message}
+                        {errors["login_email"].message}
                       </p>
                     )}
                   </div>
@@ -161,7 +209,7 @@ function Login() {
                     className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
                 hover:opacity-70 hover:text-opacity-90 transition-opacity ease-in duration-100"
                   >
-                    Login
+                    {loading ? 'loading...' : 'Login'}
                   </button>
                 </div>
 
@@ -265,16 +313,6 @@ function Login() {
                   </div>
                 </div>
 
-                {/* <div className="flex justify-between mb-10 text-sm font-body font-bold text-gray-400">
-                <div className="flex justify-start items-center space-x-1">
-                  <input type="checkbox" />
-                  <p className="m-0 p-0 font-medium">Remember me</p>
-                </div>
-                <div className="cursor-pointer underline-0 hover:underline hover:underline-offset-4 text-gray-400 font-medium">
-                  Forgot Password
-                </div>
-              </div> */}
-
                 <div>
                   <button
                     className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
@@ -301,6 +339,11 @@ function Login() {
         </div>
       </div>
     </div>
+    <VerificationModal open={OpenVerificationModal} close={() => setIsVerificationModal(false)} 
+    accessToken={verificationToken}
+    accessEmail={getValues("login_email")}
+    />
+    </>
   );
 }
 

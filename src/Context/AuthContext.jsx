@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { IS_AUTH, USER } from "../utils/constant";
+import { setToken } from "../utils/helper";
 
 const AuthContext = createContext();
 
@@ -10,11 +11,10 @@ const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
 
 
-  const login = (userData) => {
-    setUser(userData);
-    setIsAuth(true);
-    localStorage.setItem(USER, JSON.stringify(userData));
-    localStorage.setItem(IS_AUTH, "true");
+  const login = (token, user) => {
+    setUser(user)
+    setToken(token)
+    setIsAuth(true)
   };
 
   const logout = () => {
