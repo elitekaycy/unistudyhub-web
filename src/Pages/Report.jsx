@@ -1,11 +1,11 @@
 import React from 'react'
-import { FloatingNav } from '../components'
+import { Layout } from '../components'
 
 function Report() {
   return (
-    <div>
-        <FloatingNav />
-    </div>
+   <Layout>
+    hello Report
+   </Layout>
   )
 }
 

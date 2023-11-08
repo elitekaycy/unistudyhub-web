@@ -1,12 +1,8 @@
-import React from 'react'
-import { FloatingNav } from '../components'
+import React from "react";
+import { Layout } from "../components";
 
 function Account() {
-  return (
-    <div>
-        <FloatingNav />
-    </div>
-  )
+  return <Layout>hello world</Layout>;
 }
 
-export default Account
+export default Account;
