@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import LogoDevOutlinedIcon from "@mui/icons-material/LogoDevOutlined";
 
 function Login() {
@@ -84,12 +85,14 @@ function Login() {
               </div>
 
               <div>
-                <button
-                  className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
+                <Link to="/feed">
+                  <button
+                    className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
                 hover:opacity-70 hover:text-opacity-90 transition-opacity ease-in duration-100"
-                >
-                  Login
-                </button>
+                  >
+                    Login
+                  </button>
+                </Link>
               </div>
 
               <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-2 justify-start">
