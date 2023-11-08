@@ -1,11 +1,11 @@
 import React from "react";
 // import "./LandingPage.css";
-import Navbar from "../components/LandNavBar/Navbar";
-import Welcome from "../components/Welcome/Welcome";
-import Mission from "../components/Mission/Mission";
-import Programs from "../components/Programs/Programs";
-import ContactUs from "../components/ContactUs/ContactUs";
-import Footer from "../components/Footer/Footer";
+import Navbar from "../components/HomeComps/LandNavBar/Navbar";
+import Welcome from "../components/HomeComps/Welcome/Welcome";
+import Mission from "../components/HomeComps/Mission/Mission";
+import Programs from "../components/HomeComps/Programs/Programs";
+import ContactUs from "../components/HomeComps/ContactUs/ContactUs";
+import Footer from "../components/HomeComps/Footer/Footer";
 
 function Home() {
   return (

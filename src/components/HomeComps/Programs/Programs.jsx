@@ -1,7 +1,7 @@
 import React from "react";
 import "./Programs.css";
 import Button from "../Buttons/Button";
-import programsImage from "../../assets/programsImg.svg";
+import programsImage from "../../../assets/programsImg.svg";
 
 const Programs = () => {
   return (

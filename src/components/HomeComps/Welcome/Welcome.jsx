@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Welcome.css";
-import welcomeImage from "../../assets/descriptionImg.svg";
+import welcomeImage from "../../../assets/descriptionImg.svg";
 import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 
