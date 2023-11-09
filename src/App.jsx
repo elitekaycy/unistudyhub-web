@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Feed, Home, Login, Account, OTP, Profile } from "./Pages";
+import { ProtectedRoute } from "./components";
 
 const AppRouter = createBrowserRouter([
   {
@@ -8,23 +9,43 @@ const AppRouter = createBrowserRouter([
   },
   {
     path: "/feed",
-    element: <Feed />,
+    element: (
+      <ProtectedRoute>
+        <Feed />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <ProtectedRoute>
+        <Login />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/user",
-    element: <Account />,
+    element: (
+      <ProtectedRoute>
+        <Account />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <ProtectedRoute>
+        <Profile />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/login/otp",
-    element: <OTP />,
+    element: (
+      <ProtectedRoute>
+        <OTP />,
+      </ProtectedRoute>
+    ),
   },
 ]);
 
