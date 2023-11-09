@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewPostButton from "./HomeComps/buttons/NewPostButton";
+import NewPostButton from "../components/Buttons/NewPostButton";
 import { useInitials } from "../utils/helper";
 import NewPostModal from "./Modals/NewPostModal";
 import { useAuthContext } from "../Context/AuthContext";
