@@ -15,9 +15,9 @@ function FloatingNav() {
       tagname: "home",
     },
     {
-      name: "report",
+      name: "profile",
       iconClassName: "material-symbols-outlined",
-      link: "/report",
+      link: "/profile",
       tagname: "overview",
     },
     {
