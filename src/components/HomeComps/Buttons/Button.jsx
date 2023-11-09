@@ -3,7 +3,7 @@ import "./Button.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const Button = ({ title, cName, iconName, type }) => {
+function Button({ title, cName, iconName, type }) {
   return (
     <button
       className={`${cName} font-header font-semibold text-md`}

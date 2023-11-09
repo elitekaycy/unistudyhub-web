@@ -4,7 +4,7 @@ import welcomeImage from "../../../assets/descriptionImg.svg";
 import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 
-const Welcome = () => {
+function Welcome() {
   return (
     <div className="welcome-container px-10 h-screen flex justify-center items-center ">
       <div className="container-welcome">

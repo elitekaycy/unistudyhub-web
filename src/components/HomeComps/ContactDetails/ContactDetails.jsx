@@ -2,7 +2,7 @@ import React from "react";
 import "./ContactDetails.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ContactDetails = ({ text, iconName }) => {
+function ContactDetails({ text, iconName }){
   return (
     <div className="contact-component">
       <FontAwesomeIcon
