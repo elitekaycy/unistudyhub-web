@@ -1,22 +1,24 @@
-/* {
-  background-color: black;
-} */
 .primary-button {
-  background-color: #00227a;
+  background-color: #7743db;
   color: white;
-  padding: 10px 10px;
+  padding: 8px 25px;
   border-radius: 5px;
   margin: 0 10px;
   font-weight: 600;
   font-size: 14px;
+  transition: 0.2s;
+}
+
+.primary-button:hover {
+  opacity: 0.7;
 }
 
 .secondary-button {
   background-color: white;
-  color: #00227a;
-  padding: 10px 10px;
+  color: #7743db;
+  padding: 4px 15px;
   border-radius: 5px;
-  border: 2px solid #00227a;
+  border: 2px solid #7743db;
   margin: 0 10px;
   font-weight: 600;
   font-size: 14px;
@@ -24,28 +26,22 @@
 
 .get-started {
   /* background-color: #00227a; */
-  background: linear-gradient(45deg, #00227a, #f7ab4a);
+  background: #7743db;
   color: white;
-  padding: 15px 40px;
-  border-radius: 5px;
+  padding: 20px 40px;
+  border-radius: 2px;
   font-weight: 600;
   font-size: 14px;
   width: fit-content;
-  /* animation-duration: 3s;
-  animation-name: slidein2; */
+  border: 1px solid white;
+  transition: 0.2s;
 }
 
-/* @keyframes slidein2 {
-  from {
-    margin-left: 100%;
-    width: 400%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 24%;
-  }
-} */
+.get-started:hover {
+  background: white;
+  color: #7743db;
+  border: 1px solid #7743db;
+}
 
 .view-more {
   /* background-color: #f7ab4a; */

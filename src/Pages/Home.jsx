@@ -16,13 +16,13 @@ function Home() {
       <section className="welcome-section">
         <Welcome></Welcome>
       </section>
-      <section style={{ marginTop: "40px" }}>
+      <section className="mt-8">
         <Mission></Mission>
       </section>
-      <section style={{ marginTop: "40px" }}>
+      <section className="mt-8">
         <Programs></Programs>
       </section>
-      <section className="contact-us-section" style={{ marginTop: "40px" }}>
+      <section className="contact-us-section mt-8">
         <ContactUs></ContactUs>
       </section>
       <section className="footer-section">

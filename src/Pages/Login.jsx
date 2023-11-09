@@ -213,15 +213,14 @@ function Login() {
                   </button>
                 </div>
 
-                <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-2 justify-start">
-                  <p className="text-gray-400 font-medium">Not a member? </p>
-                  <p
-                    className="text-bgsecondary cursor-pointer hover:underline hover:underline-offset-4 font-medium"
-                    onClick={setLogin}
-                  >
-                    Sign Up
-                  </p>
-                </div>
+              <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-1 justify-start">
+                <p className="text-gray-400 font-medium">Not a member? </p>
+                <p
+                  className="text-bgsecondary cursor-pointer hover:underline hover:underline-offset-4 font-medium"
+                  onClick={setLogin}
+                >
+                  Sign Up
+                </p>
               </div>
             </form>
           ) : (
@@ -333,7 +332,7 @@ function Login() {
                     Login
                   </p>
                 </div>
-              </div>
+     </div>
             </form>
           )}
         </div>

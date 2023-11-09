@@ -1,5 +1,9 @@
 .mission-container {
-  background-color: #fff0dc;
+  /* background-color: #000000; */
+  background: url("../../../assets/bg4.jpg");
+  background-repeat: no-repeat;
+  background-attachment: none;
+  background-position: center;
 }
 
 .container-mission {
@@ -16,7 +20,7 @@
 }
 
 .mission-span {
-  background-color: #efb343;
+  background-color: #7743db;
   width: 70px;
   height: 4px;
   border-radius: 5px;
@@ -26,7 +30,7 @@
 
 .mission-header {
   letter-spacing: 4px;
-  color: #00227a;
+  color: #dcb62f;
   margin: 0;
 }
 /* `` End Title text styling plus span styling*/
@@ -37,8 +41,7 @@
   font-weight: 600;
   font-size: 14px;
 
-  border: 1px solid;
-  box-shadow: 2px 2px rgb(170, 170, 170);
   padding: 1rem;
+  color: white;
 }
 /* ``Mission Description text styling*/

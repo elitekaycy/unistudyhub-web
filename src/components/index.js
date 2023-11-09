@@ -5,6 +5,7 @@ import Layout from "./Layout/Layout";
 import FeedContent from "./FeedContent";
 import Categories from "./Categories";
 import Resource from "./Resource";
+import Loading from "./Loading";
 
 export {
   NavigationBar,
@@ -13,4 +14,5 @@ export {
   Categories,
   Resource,
   Layout,
+  Loading,
 };
