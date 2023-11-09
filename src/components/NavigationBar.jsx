@@ -3,7 +3,7 @@ import NewPostButton from "./HomeComps/buttons/NewPostButton";
 import { useInitials } from "../utils/helper";
 import NewPostModal from "./Modals/NewPostModal";
 import { useAuthContext } from "../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavigationBar() {
   const { user } = useAuthContext();
@@ -31,9 +31,11 @@ function NavigationBar() {
   return (
     <>
       <div className="fixed top-0 bg-opacity-70 backdrop-blur-sm w-full flex flex-row items-center justify-between p-4 sm:p-6 sm:px-20 px-10 bg-white shadow-sm">
-        <div className="tracking-tighter text-2xl sm:text-3xl font-bold font-header">
-          UniStudy
-        </div>
+        <Link to={"/"}>
+          <div className="tracking-tighter text-2xl sm:text-3xl font-bold font-header text-black">
+            UniStudy
+          </div>
+        </Link>
         <div className="flex flex-row items-center justify-evenly space-x-6 font-header">
           {search ? (
             <div
@@ -90,7 +92,7 @@ function NavigationBar() {
                 <div className="font-semibold text-md">{user?.email}</div>
               </div>
               <div
-                class="py-2 border border-red-600 w-full text-center rounded-sm text-red-600 hover:bg-red-600 hover:text-white transition-colors delay-100 font-semibold"
+                class="py-2 border border-red-600 w-full text-center rounded-sm text-red-600 hover:bg-red-600 hover:text-white transition-colors delay-100 font-semibold cursor-pointer"
                 onClick={logouty}
               >
                 Sign out
