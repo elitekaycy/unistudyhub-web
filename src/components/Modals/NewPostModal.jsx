@@ -10,8 +10,10 @@ function NewPostModal({ open, close }) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
   const [resourceFile, setResourceFile] = useState(null);
+  const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
   const { user } = useAuthContext()
+
 
   const postResource = async(e) => {
     e.preventDefault();
@@ -38,28 +40,38 @@ function NewPostModal({ open, close }) {
 
       if(!megaUploadResource) throw Error("could not upload file")
 
-      const resource = {
-         user_id: user?.id,
-         url: megaUploadResource,
-        upload_date: "",
+      const requestData = {
+        user_id: user.id,
+        url: megaUploadResource,
+        upload_date: new Date().toISOString(),
         image_url: "",
-         course_id: 0,
-         description: description,
-         category_id: 0
-      }
+        course_id: null,
+        description: description,
+        category_id: null
+      };
+    //   {
+    //     "user_id": 3,
+    //     "url": "https://mega.co.nz/#!AK9DwLbZ!2PNNhIvqFUxqXSLBHS8GlmuOQakDySptG62ZT8COXF4",
+    //     "upload_date": "2023-11-09T21:04:08.777Z",
+    //     "image_url": "",
+    //     "course_id": null,
+    //     "description": "hewldos",
+    //     "category_id": null
+    // }
 
-      console.log("resource metadata ", resource)
+      
+      console.log("resource metadata ", requestData)
 
-      const uploadResourceMetadata = await BaseFetch(`${BASE_URL}/resources`, {
+      const uploadResourceMetadata = await fetch(`${BASE_URL}/resources`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ resource })
+        body: JSON.stringify(requestData)
       })
 
-      if(!uploadResourceMetadata) throw Error('unable to upload resource')
+      if(!uploadResourceMetadata.ok) throw Error('unable to upload resource')
       toast.success("succesfully uploaded resource")
       
     }
@@ -102,7 +114,7 @@ function NewPostModal({ open, close }) {
         </button>
         <input
           type="file"
-          
+          accept=".pdf"
           onChange={handleFileSelect}
           ref={hiddenFileInput}
           className="hidden"
@@ -192,7 +204,7 @@ function NewPostModal({ open, close }) {
 
               <button
                 onClick={(e) => CancelShareResource(e)}
-                className="w-full p-2 flex flex-row items-center gap-2 text-purple-700 justify-center rounded-md border border-purple-700 hover:border-purple-600"
+                className="w-full p-2 flex flex-row items-center gap-2 text-purple-700 justify-center rounded-md border border-purple-700 hover:border-black hover:text-black"
               >
                 <span className="material-symbols-outlined">cancel</span>
                 <span className="font-semibold">Cancel</span>
