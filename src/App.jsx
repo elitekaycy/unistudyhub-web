@@ -23,7 +23,7 @@ const AppRouter = createBrowserRouter([
     element: <Report />,
   },
   {
-    path: "/OTP",
+    path: "/login/otp",
     element: <OTP />,
   },
 ]);

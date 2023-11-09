@@ -3,12 +3,12 @@ import "./Button.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const Button = ({ title, cName, iconName, type, fnx }) => {
+const Button = ({ title, cName, iconName, type }) => {
   return (
     <button
       className={`${cName} font-header font-semibold text-md`}
       type={type}
-      onClick={fnx}
+      // onClick={fnx}
     >
       {title}
       <FontAwesomeIcon

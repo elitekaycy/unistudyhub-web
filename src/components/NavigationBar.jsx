@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import NewPostButton from "./HomeComps/buttons/NewPostButton";
 import { useInitials } from "../utils/helper";
 import NewPostModal from "./Modals/NewPostModal";
+import { useAuthContext } from "../Context/AuthContext";
 
 function NavigationBar() {
+  const { user } = useAuthContext()
   const [openNewPostModal, setOpenNewPostModal] = useState(false);
   const [search, setSearch] = useState(false);
 
@@ -11,10 +13,6 @@ function NavigationBar() {
     setSearch(!search);
   }
 
-  const [user, setUser] = useState({
-    username: "dickson",
-    email: "dicksonanyaele@gmail.com",
-  });
 
   return (
     <>
