@@ -1,4 +1,4 @@
-import { TOKEN } from "./constant"
+import { BASE_URL, TOKEN } from "./constant"
 
 export const useInitials = (name) => {
     if (!name) 
@@ -22,6 +22,10 @@ export const getToken =  () => {
     return localStorage.getItem(TOKEN) || null
 }
 
+export const removeToken = () => [
+    localStorage.removeItem(TOKEN)
+]
+
 export const BaseFetch = async(url, options = {
     method: 'GET'
 }) => {
@@ -35,4 +39,22 @@ export const BaseFetch = async(url, options = {
         throw Error(err)
     }
 
+}
+
+export const getMe = async() => {
+    try {
+        const token = getToken()
+        const getUser = await BaseFetch(`${BASE_URL}/users/me`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+        return getUser
+
+    }
+    catch(err) {
+        return null
+    }
 }

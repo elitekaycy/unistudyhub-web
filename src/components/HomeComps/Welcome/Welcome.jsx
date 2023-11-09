@@ -20,7 +20,7 @@ const Welcome = () => {
             <Button
               title={"Get Started"}
               cName={"get-started"}
-              fnx={login}
+              // fnx={login}
             ></Button>
           </Link>
         </div>
