@@ -1,11 +1,75 @@
 import { useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
+import { BaseFetch } from "../../utils/helper";
+import { BASE_URL } from "../../utils/constant";
+import { getToken } from '../../utils/helper'
+import { useAuthContext } from '../../Context/AuthContext'
 
 function NewPostModal({ open, close }) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
   const [resourceFile, setResourceFile] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const { user } = useAuthContext()
+
+  const postResource = async(e) => {
+    e.preventDefault();
+    if (!resourceFile) return toast.error("no resource file to upload");
+    if (description === "")
+      return toast.error("give a valid description of file");
+    if (categories === "") return toast.error("select a category");
+
+    setLoading(true)
+    const token = getToken()
+    try {
+      let formdata = new FormData()
+      formdata.append("file", resourceFile)
+      console.log('file', formdata, resourceFile)
+
+      const megaUploadResource = await BaseFetch(`${BASE_URL}/upload_resource`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formdata,
+        
+      })
+
+      if(!megaUploadResource) throw Error("could not upload file")
+
+      const resource = {
+         user_id: user?.id,
+         url: megaUploadResource,
+        upload_date: "",
+        image_url: "",
+         course_id: 0,
+         description: description,
+         category_id: 0
+      }
+
+      console.log("resource metadata ", resource)
+
+      const uploadResourceMetadata = await BaseFetch(`${BASE_URL}/resources`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ resource })
+      })
+
+      if(!uploadResourceMetadata) throw Error('unable to upload resource')
+      toast.success("succesfully uploaded resource")
+      
+    }
+    catch(err) {
+      toast.error(String(err))
+    }
+    finally {
+      setLoading(false)
+    }
+  }
 
   const [categories, setCategories] = useState([
     {
@@ -22,6 +86,11 @@ function NewPostModal({ open, close }) {
 
   const CreateResourceFile = () => {
     const hiddenFileInput = useRef(null);
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+       setResourceFile(file)
+    }
     return (
       <>
         <button
@@ -33,29 +102,13 @@ function NewPostModal({ open, close }) {
         </button>
         <input
           type="file"
-          accept=".pdf"
-          onChange={(e) => setResourceFile(e.target.files[0])}
+          
+          onChange={handleFileSelect}
           ref={hiddenFileInput}
           className="hidden"
         />
       </>
     );
-  };
-
-  const PostShareResource = (e) => {
-    e.preventDefault();
-    if (!resourceFile) return toast.error("no resource file to upload");
-    if (description === "")
-      return toast.error("give a valid description of file");
-    if (categories === "") return toast.error("select a category");
-
-    const resourceInput = {
-      category: selectedCategory,
-      description,
-      resource: resourceFile,
-    };
-
-    console.log("resource input is ", resourceInput);
   };
 
   const CancelShareResource = (e) => {
@@ -130,11 +183,11 @@ function NewPostModal({ open, close }) {
 
             <div className="w-full mt-10 flex-col items-center space-y-2 justify-center">
               <button
-                onClick={(e) => PostShareResource(e)}
+                onClick={(e) => postResource(e)}
                 className="w-full p-2 flex flex-row items-center gap-2 justify-center rounded-md text-white bg-purple-700 hover:bg-purple-600"
               >
                 <span className="material-symbols-outlined">upload</span>
-                <span className="font-semibold">share</span>
+                <span className="font-semibold">{loading ? "uploading..." : 'share'}</span>
               </button>
 
               <button

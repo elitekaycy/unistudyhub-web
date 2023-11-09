@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { BASE_URL, universities } from "../utils/constant";
+import { BASE_URL } from "../utils/constant";
 import { BaseFetch } from "../utils/helper";
 import { useAuthContext } from "../Context/AuthContext";
 import VerificationModal from "../components/Modals/VerificationModal";
+import { useEffect } from "react";
 // import LogoDevOutlinedIcon from "@mui/icons-material/LogoDevOutlined";
 
 function Login() {
@@ -14,6 +15,18 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [OpenVerificationModal, setIsVerificationModal] = useState(false);
   const [verificationToken, setVerificationToken] = useState("");
+  const [universities, setUniversities] = useState([])
+
+  const fetchUniversities = async() => {
+    return await BaseFetch(`${BASE_URL}/universities`)
+  }
+
+  useEffect(() => {
+    fetchUniversities().then(uni => {
+      setUniversities(uni)
+      console.log("uni ", uni)
+    })
+  }, [])
 
   const navigate = useNavigate();
 
@@ -47,6 +60,7 @@ function Login() {
       });
 
       if (!loginUser) throw new Error("user does not exist");
+      console.log(":ks ", loginUser)
       const getUser = await BaseFetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
@@ -91,6 +105,7 @@ function Login() {
       username: data?.signup_username,
       email: data?.signup_email,
       password: data?.signup_password,
+      university: data?.signup_university
     };
 
     // user["university"] = data["signup_university"]
@@ -301,16 +316,17 @@ function Login() {
                         name="universities"
                         {...register("signup_university", { required: true })}
                         className="px-4 py-4 w-full rounded-md placeholder-textsecondary appearance-none"
+                        defaultValue={""}
                       >
                         <option value="" disabled>
                           Select your University
                         </option>
                         {universities.map((university) => (
                           <option
-                            key={university.value}
-                            value={university.value}
+                            key={university.id}
+                            value={university.name}
                           >
-                            {university.label}
+                            {university.name}
                           </option>
                         ))}
                       </select>
