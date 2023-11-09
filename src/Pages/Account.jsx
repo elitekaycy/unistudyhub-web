@@ -17,9 +17,6 @@ function Account() {
     Authorization: `Bearer ${token}`,
   };
 
-  const filterFunction = (r) => {
-    return r?.title.includes(search) || r?.description.includes(search)
-  }
 
   useEffect(() => {
     fetch(`${BASE_URL}/resources`, {
@@ -34,6 +31,10 @@ function Account() {
         console.log("error");
       });
   }, []);
+
+  const filteredData = myResources.filter(item =>
+     item.description && item.description.toLowerCase().includes(search.toLowerCase())
+  );
 
   const Resource = (r) => {
     return (
@@ -100,7 +101,7 @@ function Account() {
 
           <div className="mt-14 flex flex-row flex-wrap gap-4 w-full">
             {myResources.length &&
-              myResources.map((r) => <Resource key={r?.id} resource={r} />)}
+              filteredData.filter(r => r?.description.includes(search)).map((r) => <Resource key={r?.id} resource={r} />)}
           </div>
         </div>
       </div>
