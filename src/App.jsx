@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Feed, Home, Login, Account, Report, OTP } from "./Pages";
+import { Feed, Home, Login, Account, OTP, Profile } from "./Pages";
 
 const AppRouter = createBrowserRouter([
   {
@@ -19,8 +19,8 @@ const AppRouter = createBrowserRouter([
     element: <Account />,
   },
   {
-    path: "/report",
-    element: <Report />,
+    path: "/profile",
+    element: <Profile />,
   },
   {
     path: "/login/otp",

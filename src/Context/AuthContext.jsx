@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setIsAuth(false);
-    removeToken()
+    removeToken();
   };
 
   useEffect(() => {

@@ -3,16 +3,30 @@ import NewPostButton from "./HomeComps/buttons/NewPostButton";
 import { useInitials } from "../utils/helper";
 import NewPostModal from "./Modals/NewPostModal";
 import { useAuthContext } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function NavigationBar() {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
+  const { logout } = useAuthContext();
   const [openNewPostModal, setOpenNewPostModal] = useState(false);
   const [search, setSearch] = useState(false);
+  const [userMenu, setUserMenu] = useState(false);
+
+  const navigate = useNavigate();
 
   function handleSearchState() {
     setSearch(!search);
   }
+  console.log(user);
 
+  function logouty() {
+    logout();
+    navigate("/login");
+  }
+
+  function userDropdown() {
+    setUserMenu(!userMenu);
+  }
 
   return (
     <>
@@ -57,11 +71,32 @@ function NavigationBar() {
             </span>
           </div>
           <NewPostButton onOpen={() => setOpenNewPostModal(true)} />
-          <div className="w-12 h-12 p-4 flex flex-row items-center justify-center rounded-full bg-purple-100">
+          <div
+            className="w-12 h-12 p-4 flex flex-row items-center justify-center rounded-full bg-purple-100 cursor-pointer hover:shadow-md"
+            onClick={userDropdown}
+          >
             <div className="font-bold text-lg text-bgsecondary">
               {useInitials(user?.username)}
             </div>
           </div>
+
+          {userMenu && (
+            <div className="fixed top-28 right-12 flex flex-col justify-center items-center bg-white rounded-md p-4 space-y-5 z-10">
+              <div className="border-b border-b-gray-300 pb-3 space-y-1">
+                <div className="font-semibold text-md text-gray-600">
+                  {user?.username}
+                </div>
+                dd
+                <div className="font-semibold text-md">{user?.email}</div>
+              </div>
+              <div
+                class="py-2 border border-red-600 w-full text-center rounded-sm text-red-600 hover:bg-red-600 hover:text-white transition-colors delay-100 font-semibold"
+                onClick={logouty}
+              >
+                Sign out
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <NewPostModal

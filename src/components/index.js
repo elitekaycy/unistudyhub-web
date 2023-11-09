@@ -6,6 +6,7 @@ import FeedContent from "./FeedContent";
 import Categories from "./Categories";
 import Resource from "./Resource";
 import Loading from "./Loading";
+import ProtectedRoute from "./Auth/ProtectedRoute";
 
 export {
   NavigationBar,
@@ -15,4 +16,5 @@ export {
   Resource,
   Layout,
   Loading,
+  ProtectedRoute,
 };
