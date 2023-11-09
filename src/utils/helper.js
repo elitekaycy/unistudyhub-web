@@ -49,3 +49,41 @@ export const getMe = async () => {
     return null;
   }
 };
+
+
+export const getCourses = async() => {
+  try {
+    const token = getToken();
+    const getUser = await BaseFetch(`${BASE_URL}/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return getUser;
+  } catch (err) {
+    return null;
+  }
+}
+
+export function downloadFile(url, fileName) {
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return response.blob();
+    })
+    .then(blob => {
+      const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch(error => console.error('Error downloading PDF:', error));
+}

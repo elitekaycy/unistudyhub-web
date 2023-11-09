@@ -17,7 +17,6 @@ function NavigationBar() {
   function handleSearchState() {
     setSearch(!search);
   }
-  console.log(user);
 
   function logouty() {
     logout();
