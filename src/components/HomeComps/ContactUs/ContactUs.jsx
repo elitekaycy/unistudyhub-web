@@ -76,7 +76,7 @@ class ContactUs extends React.Component {
     // var { contactItems } = this.state;
 
     return (
-      <div className="contact-us-container">
+      <div id="contact" className="contact-us-container">
         <div className="container-contact-us">
           <div className="contact-us-header-text">
             <h2>Get in touch!</h2>

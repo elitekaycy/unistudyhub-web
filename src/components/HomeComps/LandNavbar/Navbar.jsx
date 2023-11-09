@@ -1,14 +1,15 @@
 import React from "react";
 import Button from "../Buttons/Button";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className="fixed top-0 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm w-full px-20 py-2 z-20">
       <div className="nav-container">
-        <div className="logo">Vine's</div>
-        <ul className="link-items">
+        <div className="logo font-header text-3xl font-bold">UniStudy</div>
+        <ul className="link-items font-header">
           <div className="active-link">
             <li>
               <a href="#about" id="active">
@@ -36,17 +37,19 @@ const Navbar = () => {
             <a href="#contact">Enrolment</a>
           </li>
         </ul>
-        <div className="buttons">
-          <Button
-            title={"Apply Now"}
-            cName={"primary-button"}
-            iconName={"icon-display"}
-          ></Button>
-          <Button
+        <div className="buttons font-header">
+          <Link to="/login">
+            <Button
+              title={"Sign Up"}
+              cName={"primary-button"}
+              iconName={"icon-display"}
+            ></Button>
+          </Link>
+          {/* <Button
             title={"Donate"}
             cName={"secondary-button"}
             iconName={"icon-display"}
-          ></Button>
+          ></Button> */}
         </div>
       </div>
     </nav>

@@ -85,7 +85,7 @@ function Login() {
               </div>
 
               <div>
-                <Link to="/feed">
+                <Link to="/OTP">
                   <button
                     className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
                 hover:opacity-70 hover:text-opacity-90 transition-opacity ease-in duration-100"
@@ -95,7 +95,7 @@ function Login() {
                 </Link>
               </div>
 
-              <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-2 justify-start">
+              <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-1 justify-start">
                 <p className="text-gray-400 font-medium">Not a member? </p>
                 <p
                   className="text-bgsecondary cursor-pointer hover:underline hover:underline-offset-4 font-medium"
@@ -190,15 +190,17 @@ function Login() {
               </div> */}
 
               <div>
-                <button
-                  className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
+                <Link to="/OTP">
+                  <button
+                    className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
                 hover:opacity-70 hover:text-opacity-90 transition-opacity ease-in duration-100"
-                >
-                  Sign Up
-                </button>
+                  >
+                    Sign Up
+                  </button>
+                </Link>
               </div>
 
-              <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-2 justify-start">
+              <div className="text-sm font-secondaryheader font-normal tracking-wide mt-7 flex space-x-1 justify-start">
                 <p className="text-gray-400 font-medium">Already a member? </p>
                 <p
                   className="text-bgsecondary cursor-pointer hover:underline hover:underline-offset-4 font-medium"
