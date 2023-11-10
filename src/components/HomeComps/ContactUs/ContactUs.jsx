@@ -87,15 +87,15 @@ class Contactus extends React.Component {
             <ContactDetails
               text={"+233 243 7777 61"}
               iconName={faPhone}
-            ></ContactDetails>
+            />
             <ContactDetails
               text={"Madina-Accra, Ghana"}
               iconName={faLocation}
-            ></ContactDetails>
+            />
             <ContactDetails
               text={"reujoyamissah@gmail.com"}
               iconName={faEnvelope}
-            ></ContactDetails>
+            />
           </div>
 
           <div className="contact-form">
@@ -111,19 +111,19 @@ class Contactus extends React.Component {
                       placeHolder="Enter your fullname"
                       value={this.state.name}
                       onChange={(e) => this.handleChange(e, "name")}
-                    ></InputFields>
+                    />
                     <InputFields
                       iconName={faEnvelope}
                       placeHolder="Enter your email"
                       value={this.state.email}
                       onChange={(e) => this.handleChange(e, "email")}
-                    ></InputFields>
+                    />
                   </div>
                   <div className="input-box">
                     <MessageBox
                       value={this.state.message}
                       onChange={(e) => this.handleChange(e, "message")}
-                    ></MessageBox>
+                    />
                   </div>
                 </div>
                 <Button
@@ -131,7 +131,7 @@ class Contactus extends React.Component {
                   title={"Submit"}
                   cName={"submit-button"}
                   iconName={"icon-display"}
-                ></Button>
+                />
                 <div>
                   {/* {contactItems.map((contacts) => (
                     <p key={contacts.name}>{contacts.name}</p>
