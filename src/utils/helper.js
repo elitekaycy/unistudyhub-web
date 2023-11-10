@@ -87,3 +87,35 @@ export function downloadFile(url, fileName) {
     })
     .catch(error => console.error('Error downloading PDF:', error));
 }
+
+
+
+export const downloadPdf = async (url, filename) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    // Create a link element
+    const link = document.createElement('a');
+
+    // Create a Blob URL for the blob
+    const blobUrl = URL.createObjectURL(blob);
+
+    // Set the link's href attribute to the Blob URL
+    link.href = blobUrl;
+
+    // Set the download attribute with the desired filename
+    link.download = filename;
+
+    // Append the link to the document body
+    document.body.appendChild(link);
+
+    // Trigger a click on the link to start the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error('Error downloading PDF:', error);
+  }
+};

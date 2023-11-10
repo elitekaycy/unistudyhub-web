@@ -3,18 +3,62 @@ import { Layout } from "../components";
 import { useAuthContext } from "../Context/AuthContext";
 import {
   BaseFetch,
-  downloadFile,
   getToken,
   useInitials,
 } from "../utils/helper";
 import { BASE_URL } from "../utils/constant";
 import toast from "react-hot-toast";
 import fileIcon from "../assets/fileIcon.png";
+import FileDownload from "react-file-download";
 
 function Account() {
   const { user } = useAuthContext();
   const [myResources, setMyResources] = useState([]);
   const [search, setSearch] = useState("");
+
+  const downloadFile = async (fileUrl, fileName) => {
+    try {
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+  
+      // Create a link element
+      const link = document.createElement('a');
+  
+      // Create a Blob URL for the blob
+      const blobUrl = window.URL.createObjectURL(blob);
+  
+      // Set the link's href to the Blob URL
+      link.href = blobUrl;
+  
+      // Set the download attribute with the desired file name
+      link.download = fileName || 'file.pdf';
+  
+      // Append the link to the document body
+      document.body.appendChild(link);
+  
+      // Programmatically click the link to trigger the download
+      link.click();
+  
+      // Remove the link element
+      document.body.removeChild(link);
+  
+      // Revoke the Blob URL to free up resources
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  };
+  
+
+  const download = async(url) => {
+   let res = await fetch(`${BASE_URL}/download_resource?url=${url}`, {
+      method: 'POST',
+      Authorization: `Bearer ${token}`
+    })
+
+    if(!res.ok) toast.error("could not download")
+    else toast.success("download started")
+  }
 
   const token = getToken();
   const headers = {
