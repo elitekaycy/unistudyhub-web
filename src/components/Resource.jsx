@@ -28,7 +28,6 @@ function Resource() {
       });
   }, [data]);
 
-<<<<<<< Updated upstream
   const FormatDate = (dateString) => {
     // Replace this with your date string
     const originalDate = new Date(dateString);
@@ -47,27 +46,6 @@ function Resource() {
     }${day} ${hours}:${minutes}:${seconds}`;
   };
 
-=======
-  // const [dates, setDates] = useState([]);
-
-  // function formatDate(timestamp) {
-  //   const dateTime = new Date(timestamp);
-  //   const year = dateTime.getFullYear();
-  //   const month = dateTime.getMonth() + 1; // Months are zero-indexed
-  //   const day = dateTime.getDate();
-  //   const hours = dateTime.getHours();
-  //   const minutes = dateTime.getMinutes();
-  //   const seconds = dateTime.getSeconds();
-
-  //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  // }
-
-  // function getDates() {
-  //   // Assuming data.upload_date is an array of timestamps
-  //   const newDates = data.upload_date.map((timestamp) => formatDate(timestamp));
-  //   setDates(newDates);
-  // }
->>>>>>> Stashed changes
   return (
     <div className="w-full max-w-xxl sm:px-32 px-10 whitespace-normal mt-4 space-y-3 overflow-x-hidden">
       {/* <Link to={"/feedDetail"}>
@@ -82,13 +60,9 @@ function Resource() {
           className="flex-col bg-white  cursor-pointer p-6 rounded-md"
         >
           <div className="mb-4">
-<<<<<<< Updated upstream
             <div className="font-header font-bold text-lg">
               {FormatDate(feed.upload_date)}
             </div>
-=======
-            <div className="font-header font-bold text-lg">{feed.title}</div>
->>>>>>> Stashed changes
             <div className="font-body text-sm font-semibold text-gray-500">
               {feed.upload_date}
             </div>
