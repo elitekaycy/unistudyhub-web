@@ -8,6 +8,13 @@ import Resource from "./Resource";
 import Loading from "./Loading";
 import ProtectedRoute from "./Auth/ProtectedRoute";
 
+import Navbar from "./HomeComps/LandNavBar/Navbar";
+import Footer from "./HomeComps/Footer/Footer";
+import Welcome from "./HomeComps/Welcome/Welcome";
+import Mission from "./HomeComps/Mission/Mission";
+import Programs from "./HomeComps/Programs/Programs";
+import Contactus from "./HomeComps/ContactUs/Contactus";
+
 export {
   NavigationBar,
   FloatingNav,
@@ -17,4 +24,11 @@ export {
   Layout,
   Loading,
   ProtectedRoute,
+
+  Navbar,
+  Welcome,
+  Mission,
+  Programs,
+  Contactus,
+  Footer
 };

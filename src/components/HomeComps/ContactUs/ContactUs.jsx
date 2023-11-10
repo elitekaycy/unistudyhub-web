@@ -11,7 +11,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-class ContactUs extends React.Component {
+class Contactus extends React.Component {
   // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
   // const [message, setMessage] = useState("");
@@ -146,4 +146,4 @@ class ContactUs extends React.Component {
   }
 }
 
-export default ContactUs;
+export default Contactus;
