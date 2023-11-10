@@ -7,19 +7,19 @@ import React from "react";
 // import ContactUs from "../components/HomeComps/ContactUs/Contactus.jsx";
 // import Footer from "../components/HomeComps/Footer/Footer.jsx"
 
-import { Navbar, Welcome, Mission, Programs, Contactus, Footer} from "../components";
+import { Navbar, Welcome, Mission, Programs, Footer } from "../components";
 
 function Home() {
   return (
     <div className="body-div">
       <header>
-       <Navbar />
+        <Navbar />
       </header>
       <section className="welcome-section">
-       <Welcome />
+        <Welcome />
       </section>
       <section className="mt-8">
-       <Mission />
+        <Mission />
       </section>
       <section className="mt-8">
         <Programs />
@@ -28,10 +28,10 @@ function Home() {
         <Contactus />
       </section> */}
       <section className="footer-section">
-       <Footer />
+        <Footer />
       </section>
     </div>
   );
 }
 
-export default Home
+export default Home;
