@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./components";
+import { Home, Feed, Login, Account, Profile, OTP, FeedDetails} from './Pages/index'
 
 const AppRouter = createBrowserRouter([
   {
@@ -47,16 +48,12 @@ const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: "/feedDetails",
+    path: "/feeddetails",
     element: (
       <ProtectedRoute>
         <FeedDetails />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: "/feedDetails",
-    element: <FeedDetails />,
   },
 ]);
 

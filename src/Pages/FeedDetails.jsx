@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationBar, FloatingNav } from "../components";
 import {
   BaseFetch,
@@ -8,19 +8,27 @@ import {
 } from "../utils/helper";
 
 import img from "../assets/bg3.png";
+import { useLocation } from "react-router-dom";
+import { useAuthContext } from "../Context/AuthContext";
 
 function FeedDetails() {
-  const user = [
-    {
-      name: "John Doe",
-      email: "john@example.com",
-      institution: "University XYZ",
-      skills: ["JavaScript", "React", "Node.js"],
-      title: "Software Engineer",
-      image: "path/to/image.jpg",
-      pdf: "path/to/resume.pdf",
-    },
-  ];
+  const { state } = useLocation()
+  const { user } = useAuthContext()
+  // const user = [
+  //   {
+  //     name: "John Doe",
+  //     email: "john@example.com",
+  //     institution: "University XYZ",
+  //     skills: ["JavaScript", "React", "Node.js"],
+  //     title: "Software Engineer",
+  //     image: "path/to/image.jpg",
+  //     pdf: "path/to/resume.pdf",
+  //   },
+  // ];
+
+  useEffect(() => {
+     console.log("state ", state)
+  }, [])
 
   return (
     <div className="w-full min-h-screen bg-gray-100 h-full overflow-y-hidden flex flex-col">
@@ -37,9 +45,9 @@ function FeedDetails() {
 
             <div className="w-full flex justify-between items-center">
               <div className="flex flex-col font-header text-black">
-                <div className="font-bold text-md">Ekownana</div>{" "}
+                <div className="font-bold text-md">{user?.username}</div>{" "}
                 {/*{user?.name}*/}
-                <div className="text-gray-500 text-xs">reujoyamissah</div>
+                <div className="text-gray-500 text-xs">{user?.email}</div>
               </div>
               <div className="bg-black shadow-lg rounded-full px-8 py-3 text-sm text-white font-bold text-center flex justify-center items-center space-x-1 font-header">
                 {/* <div>{myResources.length}</div> */}
@@ -79,7 +87,7 @@ function FeedDetails() {
             <div className="w-full flex justify-between items-center">
               <div className="w-full flex flex-col font-header text-black">
                 <div className="font-bold text-xl text-bgsecondary pb-2">
-                  Post
+                {state?.feed?.title}
                 </div>{" "}
                 {/*{user?.name}*/}
                 <span className="pt-1 bg-purple-100 rounded-full w-1/3"></span>
@@ -88,8 +96,7 @@ function FeedDetails() {
             {/* </div> */}
           </div>
           <div className="w-full flex flex-row items-center justify-start gap-3 font-body font-semi text-md pt-4 pb-1 mb-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-            corrupti, numquam necessitatibus quo nobis ullam omnis dicta
+           {state?.feed?.description}
           </div>
           <div>
             <img src={img}></img>

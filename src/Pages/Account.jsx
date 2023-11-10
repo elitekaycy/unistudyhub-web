@@ -33,7 +33,7 @@ function Account() {
       .then((response) => response.json())
       .then((result) => {
         console.log("get my resources ", result);
-        setMyResources(result);
+        setMyResources(result.filter(r => r?.user_id === user.id));
       })
       .catch((error) => {
         console.log("error");

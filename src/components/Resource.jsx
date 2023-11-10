@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BaseFetch, getToken } from "../utils/helper";
 import { BASE_URL } from "../utils/constant";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Resource() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const token = getToken();
   const headers = {
@@ -27,16 +28,40 @@ function Resource() {
       });
   }, [data]);
 
+  const FormatDate = (dateString) => {
+    // Replace this with your date string
+    const originalDate = new Date(dateString);
+
+    // Get individual date components
+    const year = originalDate.getFullYear();
+    const month = originalDate.getMonth() + 1; // Months are zero-based
+    const day = originalDate.getDate();
+    const hours = originalDate.getHours();
+    const minutes = originalDate.getMinutes();
+    const seconds = originalDate.getSeconds();
+
+    // Format the date components into a readable string
+    return `${year}-${month < 10 ? "0" : ""}${month}-${
+      day < 10 ? "0" : ""
+    }${day} ${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <div className="w-full max-w-xxl sm:px-32 px-10 whitespace-normal mt-4 space-y-3 overflow-x-hidden">
       {/* <Link to={"/feedDetail"}>
         
       </Link> */}
       {data?.map((feed, index) => (
-        <div key={index} className="flex-col bg-white p-6 rounded-md">
+        <div
+          onClick={() =>
+            navigate("/feeddetails", { replace: true, state: { feed: feed } })
+          }
+          key={index}
+          className="flex-col bg-white  cursor-pointer p-6 rounded-md"
+        >
           <div className="mb-4">
             <div className="font-header font-bold text-lg">
-              {feed.upload_date}
+              {FormatDate(feed.upload_date)}
             </div>
             <div className="font-body text-sm font-semibold text-gray-500">
               {feed.date}

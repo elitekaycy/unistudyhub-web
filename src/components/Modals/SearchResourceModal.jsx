@@ -29,6 +29,7 @@ function SearchResourceModal({ open, close }) {
           ref={dateRef}
         />
       </div>
+      )}
 
   useEffect(() => {
     fetch(`${BASE_URL}/resources`, {
