@@ -32,7 +32,7 @@ function NavigationBar() {
       <div className="fixed top-0 bg-opacity-70 backdrop-blur-sm w-full flex flex-row items-center justify-between p-4 sm:p-6 sm:px-20 px-10 bg-white shadow-sm">
         <Link to={"/"}>
           <div className="tracking-tighter text-2xl sm:text-3xl font-bold font-header text-black">
-            UniStudy
+            UniStudyHub
           </div>
         </Link>
         <div className="flex flex-row items-center justify-evenly space-x-6 font-header">
