@@ -75,7 +75,7 @@ function Resource() {
               >
                 thumb_up
               </span>
-              <div className="font-body text-sm font-semibold">{`${feed.likes} Likes`}</div>
+              <div className="font-body text-sm font-semibold">{`${feed?.likes || 0} Likes`}</div>
             </div>
             <div className="flex items-center justify-start  space-x-2">
               <span
@@ -83,7 +83,7 @@ function Resource() {
               >
                 thumb_down
               </span>
-              <div className="font-body text-sm font-semibold">{`${feed.reports} Reports`}</div>
+              <div className="font-body text-sm font-semibold">{`${feed?.reports || 0} Reports`}</div>
             </div>
           </div>
         </div>

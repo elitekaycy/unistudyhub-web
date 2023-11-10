@@ -99,7 +99,7 @@ function Account() {
         <div className="px-3 justify-between flex flex-row items-center">
           <div className="text-xs font-semibold text-gray-600">{r?.resource?.title}</div>
           <button 
-          onClick={() => downloadFile(r?.resource?.url, Date.now().toString())}
+          onClick={() => window.open(r?.resource?.url)}
           className="bg-black cursor-pointer hover:shadow-lg rounded-full p-2 w-24 text-xs text-white font-semibold text-center">
           download
         </button>

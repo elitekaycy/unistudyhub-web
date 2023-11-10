@@ -104,10 +104,8 @@ function Login() {
       username: data?.signup_username,
       email: data?.signup_email,
       password: data?.signup_password,
-      university: data?.signup_university
+      university_id: data?.signup_university
     };
-
-    // user["university"] = data["signup_university"]
 
     try {
       const createUser = await fetch(`${BASE_URL}/users/open`, {
@@ -323,7 +321,7 @@ function Login() {
                         {universities.map((university) => (
                           <option
                             key={university.id}
-                            value={university.name}
+                            value={university.id}
                           >
                             {university.name}
                           </option>
@@ -334,6 +332,7 @@ function Login() {
 
                   <div>
                     <button
+                      type="submit"
                       className="w-full bg-bgsecondary text-textprimary py-3 rounded-md text-sm font-body font-bold 
                 hover:opacity-70 hover:text-opacity-90 transition-opacity ease-in duration-100"
                     >

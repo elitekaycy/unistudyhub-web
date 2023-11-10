@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationBar, FloatingNav } from "../components";
+import {useNavigate } from 'react-router-dom'
 import {
   BaseFetch,
   downloadFile,
+  getMe,
   getToken,
   useInitials,
 } from "../utils/helper";
+import toast from 'react-hot-toast'
 
 import img from "../assets/bg3.png";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../Context/AuthContext";
+import { BASE_URL } from "../utils/constant";
 
 function FeedDetails() {
   const { state } = useLocation()
   const { user } = useAuthContext()
+  const [userUniversity, setUserUniversity] = useState("")
+  const navigate = useNavigate()
   // const user = [
   //   {
   //     name: "John Doe",
@@ -25,10 +31,23 @@ function FeedDetails() {
   //     pdf: "path/to/resume.pdf",
   //   },
   // ];
+  const fetchUniversities = async() => {
+    return await BaseFetch(`${BASE_URL}/universities`)
+  }
+
 
   useEffect(() => {
-     console.log("state ", state)
+    getMe().then(async data => {
+      fetchUniversities().then(uni => {
+        const uni_name = uni.filter(uni => uni.id === data?.university_id)[0]?.name
+        setUserUniversity(uni_name)
+      })
+    })
+    .catch(err => {
+      toast.error(`${err}`)
+    })
   }, [])
+
 
   return (
     <div className="w-full min-h-screen bg-gray-100 h-full overflow-y-hidden flex flex-col">
@@ -60,7 +79,7 @@ function FeedDetails() {
             School or Institution
           </div>
           <div className="w-full font-body font-semibold text-md text-gray-400">
-            University of Ghana
+            {userUniversity}
           </div>
           <div className="w-full flex flex-row items-center justify-start gap-3 font-body font-bold text-md border-b border-b-gray-300 pt-4 pb-1 mb-2">
             Skills and Interests
@@ -104,7 +123,7 @@ function FeedDetails() {
 
           <button
             className="flex self-start bg-purple-600 border-0 hover:bg-purple-500 font-semibold font-body p-2 px-4 rounded-full text-white flex-row space-x-2 mt-2 text-md"
-            onClick={() => hiddenFileInput.current.click()}
+            onClick={() => window.open(state?.feed?.url,  "_blank")}
           >
             <span className="material-symbols-outlined">cloud_download</span>
             <span>My shared resource.pdf</span>
