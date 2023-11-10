@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Feed, Home, Login, Account, OTP, Profile } from "./Pages";
+import { Feed, Home, Login, Account, OTP, Profile, FeedDetails } from "./Pages";
 
 const AppRouter = createBrowserRouter([
   {
@@ -25,6 +25,10 @@ const AppRouter = createBrowserRouter([
   {
     path: "/login/otp",
     element: <OTP />,
+  },
+  {
+    path: "/feedDetails",
+    element: <FeedDetails />,
   },
 ]);
 

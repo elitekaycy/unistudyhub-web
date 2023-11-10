@@ -8,8 +8,8 @@ function SearchResourceModal({ open, close }) {
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [resources, setResources] = useState(["resource1", "resource2"]);
-  const [searchResource, setSearchResource] = useState([])
-  const [search, setSearch] = useState("")
+  const [searchResource, setSearchResource] = useState([]);
+  const [search, setSearch] = useState("");
   const [date, setDate] = useState("");
   const dateRef = useRef(null);
 
@@ -28,7 +28,7 @@ function SearchResourceModal({ open, close }) {
     return (
       <div className="w-40 bg-gray-100">
         <input
-          className="w-full h-full p-2 bg-transparent"
+          className="w-full h-full p-2 bg-transparent font-body font-semibold"
           type="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
@@ -117,20 +117,24 @@ function SearchResourceModal({ open, close }) {
               </div>
             </div> */}
 
-              {!resources.length && (
-                <div className="self-center pt-10 pb-10">
-                  <img src={empty} className="w-24 h-24" />
-                  <p className="text-center">Empty resources</p>
-                </div>
-              )}
+            {!resources.length && (
+              <div className="self-center pt-10 pb-10">
+                <img src={empty} className="w-24 h-24" />
+                <p className="text-center">Empty resources</p>
+              </div>
+            )}
 
-              {/* <div className="pt-8 w-full space-y-2">
+            {/* <div className="pt-8 w-full space-y-2">
                 {resources.length &&
                   resources.map((r) => <ResourceComponent key={r} />)}
               </div> */}
-            {!searchResource.length && (<div className="w-full h-48 flex flex-row items-center justify-center">
-                <div className="font-semibold text-center text-xs">search for particular resource</div>
-              </div>)}
+            {!searchResource.length && (
+              <div className="w-full h-48 flex flex-row items-center justify-center">
+                <div className="font-semibold text-center text-xs">
+                  search for particular resource
+                </div>
+              </div>
+            )}
           </Dialog.Panel>
         </div>
       </div>
