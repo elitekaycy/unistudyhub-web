@@ -47,23 +47,23 @@ class Contactus extends React.Component {
   //   this.fetchTask();
   // }
 
-  sendContactMessage(data) {
-    fetch("http://127.0.0.1:8000/contact-post/", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
-  // fetchTask() {
+  // sendContactMessage(data) {
+  //   fetch("http://127.0.0.1:8000/contact-post/", {
+  //     method: "POST", // or 'PUT'
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Success:", data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }
+  // // fetchTask() {
   //   fetch("http://127.0.0.1:8000/contacts")
   //     .then((response) => response.json())
   //     .then((data) => {
@@ -88,10 +88,12 @@ class Contactus extends React.Component {
               text={"+233 243 7777 61"}
               iconName={faPhone}
             />
+
             <ContactDetails
               text={"Madina-Accra, Ghana"}
               iconName={faLocation}
             />
+
             <ContactDetails
               text={"reujoyamissah@gmail.com"}
               iconName={faEnvelope}

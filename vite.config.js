@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react'
 import path from 'path';
+import ViteCSS from 'vite-plugin-css';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [reactRefresh()],
+  plugins: [reactRefresh(), ViteCSS()],
   resolve: {
     alias: {
       // Add any custom aliases for your project
