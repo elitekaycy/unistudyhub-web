@@ -60,11 +60,9 @@ function Resource() {
           className="flex-col bg-white  cursor-pointer p-6 rounded-md"
         >
           <div className="mb-4">
-            <div className="font-header font-bold text-lg">
-              {FormatDate(feed.upload_date)}
-            </div>
+            <div className="font-header font-bold text-lg">{feed.title}</div>
             <div className="font-body text-sm font-semibold text-gray-500">
-              {feed.upload_date}
+              {FormatDate(feed.upload_date)}
             </div>
           </div>
 
