@@ -1,7 +1,7 @@
 import React from "react";
 import "./Mission.css";
 
-const Mission = () => {
+function Mission() {
   return (
     <div className="mission-container py-20 px-20">
       <div className="container-mission backdrop-blur-sm rounded-lg bg-white bg-opacity-20 p-5">

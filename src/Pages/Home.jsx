@@ -1,32 +1,34 @@
 import React from "react";
 // import "./LandingPage.css";
-import Navbar from "../components/HomeComps/LandNavBar/Navbar";
-import Welcome from "../components/HomeComps/Welcome/Welcome";
-import Mission from "../components/HomeComps/Mission/Mission";
-import Programs from "../components/HomeComps/Programs/Programs";
-import ContactUs from "../components/HomeComps/ContactUs/ContactUs";
-import Footer from "../components/HomeComps/Footer/Footer";
+// import Navbar from "../components/HomeComps/LandNavBar/Navbar.jsx";
+// import Welcome from "../components/HomeComps/Welcome/Welcome.jsx";
+// import Mission from "../components/HomeComps/Mission/Mission.jsx";
+// import Programs from "../components/HomeComps/Programs/Programs.jsx";
+// import ContactUs from "../components/HomeComps/ContactUs/Contactus.jsx";
+// import Footer from "../components/HomeComps/Footer/Footer.jsx"
+
+import { Navbar, Welcome, Mission, Programs, Footer } from "../components";
 
 function Home() {
   return (
     <div className="body-div">
       <header>
-        <Navbar></Navbar>
+        <Navbar />
       </header>
       <section className="welcome-section">
-        <Welcome></Welcome>
+        <Welcome />
       </section>
       <section className="mt-8">
-        <Mission></Mission>
+        <Mission />
       </section>
       <section className="mt-8">
-        <Programs></Programs>
+        <Programs />
       </section>
-      <section className="contact-us-section mt-8">
-        <ContactUs></ContactUs>
-      </section>
+      {/* <section className="contact-us-section mt-8">
+        <Contactus />
+      </section> */}
       <section className="footer-section">
-        <Footer></Footer>
+        <Footer />
       </section>
     </div>
   );

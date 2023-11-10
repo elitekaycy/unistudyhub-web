@@ -4,7 +4,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+function Navbar(){
   return (
     <nav className="fixed top-0 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm w-full px-20 py-2 z-20">
       <div className="nav-container">

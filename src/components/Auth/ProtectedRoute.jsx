@@ -9,9 +9,9 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     const getLocation = window.location.pathname.substring(1);
     if (getLocation === "login" && user) navigate("/feed", { replace: true });
-    if (!user) navigate("/login", { replace: true });
+    if (!isAuth) navigate("/login", { replace: true });
     console.log("is it depth reloading!!!!");
-  }, [user]);
+  }, [isAuth]);
 
   return <div>{children}</div>;
 }

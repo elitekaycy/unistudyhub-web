@@ -40,6 +40,10 @@ function Account() {
       });
   }, []);
 
+  const filteredData = myResources.filter(item =>
+     item.title && item.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   const Resource = (r) => {
     return (
       <div className="max-w-[300px] flex flex-col gap-4 w-full">
@@ -49,15 +53,12 @@ function Account() {
           </div>
         </div>
         <div className="px-3 justify-between flex flex-row items-center">
-          <div className="text-xs font-semibold font-body text-gray-600">
-            {r?.upload_date || new Date().toDateString()}
-          </div>
-          <button
-            onClick={() => downloadFile(r?.url, Date.now().toString())}
-            className="bg-black cursor-pointer hover:shadow-lg rounded-full p-2 w-24 text-xs text-white font-semibold text-center"
-          >
-            download
-          </button>
+          <div className="text-xs font-semibold text-gray-600">{r?.resource?.title}</div>
+          <button 
+          onClick={() => downloadFile(r?.resource?.url, Date.now().toString())}
+          className="bg-black cursor-pointer hover:shadow-lg rounded-full p-2 w-24 text-xs text-white font-semibold text-center">
+          download
+        </button>
         </div>
       </div>
     );
@@ -108,7 +109,7 @@ function Account() {
 
           <div className="mt-14 flex flex-row flex-wrap gap-4 w-full">
             {myResources.length &&
-              myResources.map((r) => <Resource key={r?.id} resource={r} />)}
+              filteredData.map((r) => <Resource key={r?.id} resource={r} />)}
           </div>
         </div>
       </div>
