@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BaseFetch, getToken } from "../utils/helper";
 import { BASE_URL } from "../utils/constant";
+import { Link } from "react-router-dom";
 
 function Resource() {
   const [data, setData] = useState([]);
@@ -19,6 +20,7 @@ function Resource() {
       .then((response) => response.json())
       .then((result) => {
         setData(result);
+        // console.log(result);
       })
       .catch((error) => {
         console.log("error");
@@ -27,7 +29,10 @@ function Resource() {
 
   return (
     <div className="w-full max-w-xxl sm:px-32 px-10 whitespace-normal mt-4 space-y-3 overflow-x-hidden">
-      {data.map((feed, index) => (
+      {/* <Link to={"/feedDetail"}>
+        
+      </Link> */}
+      {data?.map((feed, index) => (
         <div key={index} className="flex-col bg-white p-6 rounded-md">
           <div className="mb-4">
             <div className="font-header font-bold text-lg">

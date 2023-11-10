@@ -82,13 +82,12 @@ function NavigationBar() {
           </div>
 
           {userMenu && (
-            <div className="fixed top-28 right-12 flex flex-col justify-center items-center bg-white rounded-md p-4 space-y-5 z-10">
+            <div className="fixed top-28 right-12 flex flex-col justify-center items-center bg-white rounded-md p-4 space-y-5 z-10 border border-gray-300">
               <div className="border-b border-b-gray-300 pb-3 space-y-1">
-                <div className="font-semibold text-md text-gray-600">
-                  {user?.username}
+                <div className="font-semibold text-md ">{user?.username}</div>
+                <div className="font-semibold text-sm text-gray-600">
+                  {user?.email}
                 </div>
-                dd
-                <div className="font-semibold text-md">{user?.email}</div>
               </div>
               <div
                 class="py-2 border border-red-600 w-full text-center rounded-sm text-red-600 hover:bg-red-600 hover:text-white transition-colors delay-100 font-semibold cursor-pointer"

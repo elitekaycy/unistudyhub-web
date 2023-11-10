@@ -18,6 +18,18 @@ function SearchResourceModal({ open, close }) {
     Authorization: `Bearer ${token}`,
   };
 
+  const DatePicker = () => {
+    return (
+      <div className="w-40 bg-gray-100">
+        <input
+          className="w-full h-full p-2 bg-transparent font-body font-semibold"
+          type="date"
+          onChange={(e) => setDate(e.target.value)}
+          value={date}
+          ref={dateRef}
+        />
+      </div>
+
   useEffect(() => {
     fetch(`${BASE_URL}/resources`, {
       headers,
@@ -96,6 +108,25 @@ function SearchResourceModal({ open, close }) {
               <div className="self-center pt-10 pb-10">
                 <img src={empty} className="w-24 h-24" alt="Empty" />
                 <p className="text-center">find your resources</p>
+              </div>
+            )}
+
+            {!resources.length && (
+              <div className="self-center pt-10 pb-10">
+                <img src={empty} className="w-24 h-24" />
+                <p className="text-center">Empty resources</p>
+              </div>
+            )}
+
+            {/* <div className="pt-8 w-full space-y-2">
+                {resources.length &&
+                  resources.map((r) => <ResourceComponent key={r} />)}
+              </div> */}
+            {!searchResource.length && (
+              <div className="w-full h-48 flex flex-row items-center justify-center">
+                <div className="font-semibold text-center text-xs">
+                  search for particular resource
+                </div>
               </div>
             )}
 
