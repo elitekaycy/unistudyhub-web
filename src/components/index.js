@@ -8,12 +8,11 @@ import Resource from "./Resource";
 import Loading from "./Loading";
 import ProtectedRoute from "./Auth/ProtectedRoute";
 
-// import Navbar from "./HomeComps/nav/Navbar";
-// import Footer from "./HomeComps/Footer/Footer";
-// import Welcome from "./HomeComps/Welcome/Welcome";
-// import Mission from "./HomeComps/Mission/Mission";
-// import Programs from "./HomeComps/Programs/Programs";
-// import Contactus from "./HomeComps/ContactUs/Contactus";
+import Navbar from "./HomeComps/nav/Navbar";
+import Footer from "./HomeComps/Footer/Footer";
+import Welcome from "./HomeComps/Welcome/Welcome";
+import Mission from "./HomeComps/Mission/Mission";
+import Programs from "./HomeComps/Programs/Programs";
 
 export {
   NavigationBar,
@@ -25,10 +24,9 @@ export {
   Loading,
   ProtectedRoute,
 
-  // Navbar,
-  // Welcome,
-  // Mission,
-  // Programs,
-  // Contactus,
-  // Footer
+  Navbar,
+  Welcome,
+  Mission,
+  Programs,
+  Footer
 };
