@@ -24,7 +24,6 @@ function Login() {
   useEffect(() => {
     fetchUniversities().then(uni => {
       setUniversities(uni)
-      console.log("uni ", uni)
     })
   }, [])
 

@@ -1,51 +1,55 @@
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dialog } from "@headlessui/react";
-import toast from "react-hot-toast";
 import empty from "../../assets/empty.png";
+import { getToken } from "../../utils/helper";
+import { BASE_URL } from "../../utils/constant";
 
 function SearchResourceModal({ open, close }) {
   const modalRef = useRef(null);
   const [searchInput, setSearchInput] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [resources, setResources] = useState(["resource1", "resource2"]);
-  const [searchResource, setSearchResource] = useState([])
-  const [search, setSearch] = useState("")
+  const [resources, setResources] = useState([]);
+  const [searchResource, setSearchResource] = useState([]);
   const [date, setDate] = useState("");
   const dateRef = useRef(null);
 
-  const [categories, setCategories] = useState([
-    {
-      name: "computer science",
-      id: "computer_science",
-    },
-    {
-      name: "computer engineer",
-      id: "computer_engineer",
-    },
-  ]);
-
-  const DatePicker = () => {
-    return (
-      <div className="w-40 bg-gray-100">
-        <input
-          className="w-full h-full p-2 bg-transparent"
-          type="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-          ref={dateRef}
-        />
-      </div>
-    );
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   };
 
-  const ResourceComponent = () => {
+  useEffect(() => {
+    fetch(`${BASE_URL}/resources`, {
+      headers,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setResources(result);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  }, []);
+
+  const handleSearchChange = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    setSearchInput(searchTerm);
+  
+    // Filter resources based on the search term in title or upload_date
+    const filteredResources = resources.filter((resource) =>
+      resource.title.toLowerCase().includes(searchTerm) ||
+      resource.upload_date.toLowerCase().includes(searchTerm)
+    );
+  
+    setSearchResource(filteredResources);
+  };
+  
+  const ResourceComponent = ({ resource }) => {
     return (
       <div className="bg-gray-100 w-full flex flex-row justify-between items-center gap-2 p-4 rounded-md cursor-pointer hover:bg-gray-200 font-body">
-        <div className="w-12 h-12 p-2 flex flex-row items-center justify-center rounded-full bg-purple-100">
-          <div className="font-bold text-lg text-purple-600">Da</div>
-        </div>
-        <div className="font-semibold flex-1 text-md">book name</div>
-        <div className="font-bold text-gray-400 text-xs">22-1-001</div>
+        {/* Customize this based on your resource object structure */}
+        <div className="font-semibold flex-1 text-md">{resource.title}</div>
+        <div className="font-bold text-gray-400 text-xs">{resource.id}</div>
       </div>
     );
   };
@@ -66,7 +70,10 @@ function SearchResourceModal({ open, close }) {
                 search for resources
               </div>
               <span
-                onClick={() => close()}
+                onClick={() => {
+                  setSearchResource([])
+                  close()
+                }}
                 className="material-symbols-outlined hover:text-purple-700 cursor-pointer text-lg"
               >
                 cancel
@@ -81,56 +88,30 @@ function SearchResourceModal({ open, close }) {
                 placeholder="Search resource in organization by name, field or date"
                 name="search"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={handleSearchChange}
               />
             </div>
 
-            {/* <div className="flex flex-col justify-start items-start w-full space-y-2 pt-4">
-              <span className="text-gray-400 font-semibold font-body text-sm">
-                {" "}
-                filter by{" "}
-              </span>
-              <div className="flex gap-4">
-                <div className="flex flex-row items-center gap-2 bg-purple-600 text-white w-full px-2 rounded-md">
-                  <span className="material-symbols-outlined p-2">
-                    category
-                  </span>
-                  <select
-                    required
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="focus:outline-none w-full flex-1 h-full p-2 bg-purple-600 font-semibold font-body text-sm"
-                  >
-                    <option value="" disabled>
-                      Select Field
-                    </option>
-                    {categories &&
-                      categories.map((c) => (
-                        <option key={c?.id} value={c?.id}>
-                          {c?.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-
-                <DatePicker />
+            {!searchResource.length && (
+              <div className="self-center pt-10 pb-10">
+                <img src={empty} className="w-24 h-24" alt="Empty" />
+                <p className="text-center">find your resources</p>
               </div>
-            </div> */}
+            )}
 
-              {!resources.length && (
-                <div className="self-center pt-10 pb-10">
-                  <img src={empty} className="w-24 h-24" />
-                  <p className="text-center">Empty resources</p>
+            <div className="w-full h-48 space-y-2">
+              {searchResource.length ? (
+                searchResource.map((r) => (
+                  <ResourceComponent key={r.id} resource={r} />
+                ))
+              ) : (
+                <div className="w-full h-full flex flex-row items-center justify-center">
+                  <div className="font-semibold text-center text-xs">
+                    search resources
+                  </div>
                 </div>
               )}
-
-              {/* <div className="pt-8 w-full space-y-2">
-                {resources.length &&
-                  resources.map((r) => <ResourceComponent key={r} />)}
-              </div> */}
-            {!searchResource.length && (<div className="w-full h-48 flex flex-row items-center justify-center">
-                <div className="font-semibold text-center text-xs">search for particular resource</div>
-              </div>)}
+            </div>
           </Dialog.Panel>
         </div>
       </div>

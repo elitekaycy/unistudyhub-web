@@ -9,6 +9,7 @@ import { useAuthContext } from '../../Context/AuthContext'
 function NewPostModal({ open, close }) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("")
   const [resourceFile, setResourceFile] = useState(null);
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
@@ -17,6 +18,7 @@ function NewPostModal({ open, close }) {
 
   const postResource = async(e) => {
     e.preventDefault();
+    if(title === '') return toast.error("give a title")
     if (!resourceFile) return toast.error("no resource file to upload");
     if (description === "")
       return toast.error("give a valid description of file");
@@ -43,6 +45,7 @@ function NewPostModal({ open, close }) {
       const requestData = {
         user_id: user.id,
         url: megaUploadResource,
+        title: title,
         upload_date: new Date().toISOString(),
         image_url: "",
         course_id: null,
@@ -73,6 +76,10 @@ function NewPostModal({ open, close }) {
 
       if(!uploadResourceMetadata.ok) throw Error('unable to upload resource')
       toast.success("succesfully uploaded resource")
+      setResourceFile(null);
+      setDescription("");
+      setSelectedCategory("");
+      setTitle("")
       
     }
     catch(err) {
@@ -166,6 +173,15 @@ function NewPostModal({ open, close }) {
                     </option>
                   ))}
               </select>
+            </div>
+
+            <div className="w-full">
+              <input
+                className="w-full bg-gray-100 focus:outline-none p-4 rounded-md"
+                placeholder="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
 
             <div className="w-full">
