@@ -88,6 +88,10 @@ function NavigationBar() {
                 <div className="font-semibold text-sm text-gray-600">
                   {user?.email}
                 </div>
+<<<<<<< Updated upstream
+=======
+                <div className="font-semibold text-md">{user?.email}</div>
+>>>>>>> Stashed changes
               </div>
               <div
                 class="py-2 border border-red-600 w-full text-center rounded-sm text-red-600 hover:bg-red-600 hover:text-white transition-colors delay-100 font-semibold cursor-pointer"
