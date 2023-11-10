@@ -64,7 +64,7 @@ function Resource() {
               {FormatDate(feed.upload_date)}
             </div>
             <div className="font-body text-sm font-semibold text-gray-500">
-              {feed.date}
+              {feed.upload_date}
             </div>
           </div>
 

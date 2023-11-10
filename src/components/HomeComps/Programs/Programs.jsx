@@ -4,36 +4,63 @@ import Button from "../Buttons/Button";
 import programsImage from "../../../assets/programsImg.svg";
 
 const Programs = () => {
-  return (
-    <div className="programs-container">
-      <div className="container-programs">
-        <div className="programs-img-container">
-          <img
-            src={programsImage}
-            alt="programsImage"
-            className="programs-img"
-          />
-        </div>
+  const values = [
+    {
+      icon: "workspaces",
+      title: "Collaboration",
+      body:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. " +
+        "Voluptate qui earum, accusantium sint iure atque voluptatibus " +
+        "accusamus nisifacilis voluptatem ex cupiditate magni ab, asperiores optio rationedeserunt natus dolorum?",
+    },
+    {
+      icon: "accessibility_new",
+      title: "Accessible Learning Resources",
+      body:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. " +
+        "Voluptate qui earum, accusantium sint iure atque voluptatibus " +
+        "accusamus nisifacilis voluptatem ex cupiditate magni ab, asperiores optio rationedeserunt natus dolorum?",
+    },
+    {
+      icon: "code",
+      title: "Skill Enhancement ",
+      body:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. " +
+        "Voluptate qui earum, accusantium sint iure atque voluptatibus " +
+        "accusamus nisifacilis voluptatem ex cupiditate magni ab, asperiores optio rationedeserunt natus dolorum?",
+    },
+    {
+      icon: "update",
+      title: "Innovation and Adaptability",
+      body:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. " +
+        "Voluptate qui earum, accusantium sint iure atque voluptatibus " +
+        "accusamus nisifacilis voluptatem ex cupiditate magni ab, asperiores optio rationedeserunt natus dolorum?",
+    },
+  ];
 
-        <div className="programs-text-container">
-          <div className="programs-title">
-            <h2 className="programs-header">Events</h2>
-            <span className="programs-span"></span>
+  const borderColors = [
+    "border-b-green-600",
+    "border-b-blue-500",
+    "border-b-yellow-400",
+    "border-b-red-600",
+  ];
+
+  return (
+    <div className="programs-container bg-[url('./src/assets/bg2.jpg')] bg-cover w-8/12 flex justify-center ">
+      <div className="container-programs w-full flex flex-wrap justify-center">
+        {values.map((value, index) => (
+          <div
+            key={index}
+            className={`w-2/5 bg-white m-2 p-5 border-b-2 ${borderColors[index]} rounded-md`}
+          >
+            <span class="material-symbols-outlined">{value.icon}</span>
+            <div className="font-header text-2xl font-bold pb-3">
+              {value.title}
+            </div>
+            <p className="font-body font-md font-semibold">{value.body}</p>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos.
-          </p>
-          <Button
-            title={"View More"}
-            cName={"view-more"}
-            iconName={"icon-display"}
-          ></Button>
-        </div>
+        ))}
       </div>
     </div>
   );

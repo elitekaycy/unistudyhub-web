@@ -21,7 +21,7 @@ function Home() {
       <section className="mt-8">
         <Mission />
       </section>
-      <section className="mt-8">
+      <section className="pt-8 flex justify-center bg-[url('./src/assets/bg2.jpg')] bg-cover pb-8">
         <Programs />
       </section>
       {/* <section className="contact-us-section mt-8">
